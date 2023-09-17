@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+  .index {
+    min-height: 100vh;
+    background-image: url("https://e0.pxfuel.com/wallpapers/1019/412/desktop-wallpaper-whatsapp-122-chat-whatsapp-marble-iphone-for-your-mobile-tablet-explore-whatsapp-background-whatsapp-whatsapp-whatsapp-lilac-marble.jpg");
+  }
+  /* .singleChat{
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-image: url("https://blog.localz.com/hubfs/background-app-chat-featured.png");
+  } */
+  .messagesBackground{
+    background-size:contain;
+    background-image: url("https://static.vecteezy.com/system/resources/previews/025/442/425/non_2x/mobile-chat-app-online-communication-social-networking-messages-speech-bubbles-tiny-people-chatting-in-mobile-smartphone-screen-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg");
+
+  }
+  .MychatsBackground{
+    background-image: url("https://cdn.w600.comps.canstockphoto.com/chat-application-icons-eps-vector_csp14297085.jpg");
+  }
+  .messages {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  
