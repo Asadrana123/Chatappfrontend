@@ -10,6 +10,8 @@ import { useRouter } from "next/router";
 const Signin = () => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
+  console.log(ApiEndpoint);
   const toast = useToast();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -38,7 +40,7 @@ const Signin = () => {
       };
 
       const { data } = await axios.post(
-        "https://chatappback-2epk.onrender.com/api/user/Signin",
+        `${ApiEndpoint}/api/user/Signin`,
         { email, password },
         config
       );

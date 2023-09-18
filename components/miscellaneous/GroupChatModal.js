@@ -27,7 +27,7 @@ const GroupChatModal = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
-
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const { user, chats, setChats } = ChatState();
 
   const handleGroup = (userToAdd) => {
@@ -58,7 +58,7 @@ const GroupChatModal = ({ children }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`https://chatappback-2epk.onrender.com/api/user/getusers`, { search }, config);
+      const { data } = await axios.post(`${ApiEndpoint}/api/user/getusers`, { search }, config);
       console.log(data);
       setLoading(false);
       setSearchResult(data.users);
@@ -96,7 +96,7 @@ const GroupChatModal = ({ children }) => {
         },
       };
       const { data } = await axios.post(
-        `https://chatappback-2epk.onrender.com/api/chat/groupChat`,
+        `${ApiEndpoint}/api/chat/groupChat`,
         {
           name: groupChatName,
           users: selectedUsers,

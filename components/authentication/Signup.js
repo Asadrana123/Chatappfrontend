@@ -17,6 +17,7 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const {user,setUser}=ChatState();
   const router=useRouter();
   const submitHandler = async () => {
@@ -58,7 +59,7 @@ const Signup = () => {
     console.log(name, email, password, pic);
     try {
       const { data } = await axios.post(
-        "https://chatappback-2epk.onrender.com/api/user/",
+        `${ApiEndpoint}/api/user/`,
         {
           name,
           email,

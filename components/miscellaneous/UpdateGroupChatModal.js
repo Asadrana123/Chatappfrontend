@@ -30,7 +30,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [renameloading, setRenameLoading] = useState(false);
   const toast = useToast();
-
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const { selectedChat, setSelectedChat, user } = ChatState();
 
   const handleSearch = async (query) => {
@@ -46,7 +46,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`https://chatappback-2epk.onrender.com/api/user/getusers`,{search}, config);
+      const { data } = await axios.post(`${ApiEndpoint}/api/user/getusers`,{search}, config);
       console.log(data);
       setLoading(false);
       setSearchResult(data.users);
@@ -74,7 +74,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://chatappback-2epk.onrender.com/api/chat/renameChat`,
+        `${ApiEndpoint}/api/chat/renameChat`,
         {
           chatId: selectedChat._id,
           chatName: groupChatName,
@@ -109,8 +109,9 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       });
       return;
     }
-
-    if (selectedChat.groupAdmin._id !== user._id) {
+    console.log(selectedChat)
+    console.log(user.id)
+    if (selectedChat.groupAdmin !== user.id) {
       toast({
         title: "Only admins can add someone!",
         status: "error",
@@ -129,7 +130,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://chatappback-2epk.onrender.com/api/chat/groupadd`,
+        `${ApiEndpoint}/api/chat/addUser`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
@@ -141,9 +142,10 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
       setFetchAgain(!fetchAgain);
       setLoading(false);
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: error?.response?.data?.message,
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -153,9 +155,10 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
     }
     setGroupChatName("");
   };
-
   const handleRemove = async (user1) => {
-    if (selectedChat.groupAdmin._id !== user._id && user1._id !== user._id) {
+    console.log(selectedChat.groupAdmin)
+    console.log(user.id);
+    if (selectedChat.groupAdmin!== user.id && user1._id !== user.id) {
       toast({
         title: "Only admins can remove someone!",
         status: "error",
@@ -174,19 +177,19 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.put(
-        `https://chatappback-2epk.onrender.com/api/chat/removeUser`,
+        `${ApiEndpoint}/api/chat/removeUser`,
         {
           chatId: selectedChat._id,
           userId: user1._id,
         },
         config
       );
-
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setFetchAgain(!fetchAgain);
       fetchMessages();
       setLoading(false);
     } catch (error) {
+      console.log(error);
       toast({
         title: "Error Occured!",
         description: error.response.data.message,

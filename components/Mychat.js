@@ -11,6 +11,7 @@ import { ChatState } from "../Context/ChatProvider";
 const MyChats = ({ fetchAgain }) => {
   const [loggedUser, setLoggedUser] = useState();
   const { selectedChat, setSelectedChat, user, chats, setChats,notification,setNotification } = ChatState();
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const handleClickonChat=(chat)=>{
     setSelectedChat(chat);
   }
@@ -24,7 +25,7 @@ const MyChats = ({ fetchAgain }) => {
         },
       };
 
-      const { data } = await axios.get("https://chatappback-2epk.onrender.com/api/chat/", config);
+      const { data } = await axios.get(`${ApiEndpoint}/api/chat/`, config);
       data.map((element)=>{
           if(element.Notification===true&&element.latestMessage.sender._id!==user.id) setNotification([element,...notification]);
       })

@@ -14,7 +14,7 @@ import chattinggif from "../animations/chatting.json";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
 import { io } from "socket.io-client";
-const ENDPOINT = "https://chatappback-2epk.onrender.com"
+const ENDPOINT = "http://localhost:8000/"
 var socket,selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
@@ -22,6 +22,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [newMessage, setNewMessage] = useState("");
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const toast = useToast();
   const defaultOptions = {
     loop: false,
@@ -40,7 +41,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       }
     }
     try {
-      const data = await axios.put("https://chatappback-2epk.onrender.com/api/chat/sendNotification", {
+      const data = await axios.put(`${ApiEndpoint}/api/chat/sendNotification`, {
         chatId: chat._id,
         value: value
       }, config);
@@ -113,7 +114,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       const { data } = await axios.get(
-        `https://chatappback-2epk.onrender.com/api/message/${selectedChat._id}`,
+        `${ApiEndpoint}/api/message/${selectedChat._id}`,
         config
       );
       setMessages(data.result);
@@ -142,7 +143,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "https://chatappback-2epk.onrender.com/api/message/sendMessage",
+          `${ApiEndpoint}/api/message/sendMessage`,
           {
             content: newMessage,
             chatId: selectedChat._id,

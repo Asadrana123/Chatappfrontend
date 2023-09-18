@@ -37,6 +37,7 @@ function SideDrawer() {
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingChat, setLoadingChat] = useState(false);
+  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
   const router = useRouter();
   const {
     setSelectedChat,
@@ -60,7 +61,7 @@ function SideDrawer() {
       }
     }
     try {
-      const data = await axios.put("https://chatappback-2epk.onrender.com/api/chat/sendNotification", {
+      const data = await axios.put(`${ApiEndpoint}/api/chat/sendNotification`, {
         chatId: chat._id,
         value: false,
       }, config);
@@ -93,7 +94,7 @@ function SideDrawer() {
         },
       };
 
-      const { data } = await axios.post(`https://chatappback-2epk.onrender.com/api/user/getusers`, { search }, config);
+      const { data } = await axios.post(`${ApiEndpoint}/api/user/getusers`, { search }, config);
 
       setLoading(false);
       setSearchResult(data.users);
@@ -120,7 +121,7 @@ function SideDrawer() {
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`https://chatappback-2epk.onrender.com/api/chat/`, { userId }, config);
+      const { data } = await axios.post(`${ApiEndpoint}/api/chat/`, { userId }, config);
       console.log(data);
       console.log(chats);
       if (!chats.find((c) => c._id === data.chat._id)) setChats([data.chat, ...chats]);

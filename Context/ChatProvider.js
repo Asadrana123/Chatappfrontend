@@ -11,7 +11,7 @@ const ChatProvider = ({ children }) => {
     try{
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
       setUser(userInfo);
-     // router.push("/chatpage")
+      router.push("/chatpage")
     }
   catch(err){
          router.push("/")
