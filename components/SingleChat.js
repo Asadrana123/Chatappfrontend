@@ -14,7 +14,7 @@ import chattinggif from "../animations/chatting.json";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
 import { io } from "socket.io-client";
-const ENDPOINT = "http://localhost:8000/"
+const ENDPOINT = "http://localhost:8000"
 var socket,selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
