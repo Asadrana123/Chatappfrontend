@@ -14,7 +14,7 @@ import chattinggif from "../animations/chatting.json";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
 import { io } from "socket.io-client";
-const ENDPOINT = "http://localhost:8000"
+const ENDPOINT = "https://chatappserver6.onrender.com"
 var socket,selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
@@ -50,7 +50,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
   }
   useEffect(() =>{
-    socket = io(ENDPOINT);
+    //socket = io(ENDPOINT);
+     socket = io(ENDPOINT,{
+         transports: ['websocket'],
+        });
     socket.emit("setup", user);
     socket.on("connected", () => {
       setSocketConnected(true)
