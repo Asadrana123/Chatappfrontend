@@ -8,14 +8,14 @@ const ChatProvider = ({ children }) => {
   const [chats, setChats] = useState();
   const router=useRouter();
   useEffect(() => {
-    try{
       const userInfo = JSON.parse(localStorage.getItem("userInfo"));
-      setUser(userInfo);
-      router.push("/chatpage")
-    }
-  catch(err){
-         router.push("/")
-  }
+      if(userInfo){
+        setUser(userInfo);
+        router.push("/chatpage");
+      }
+      else{
+          router.push("/");
+      }
   }, []);
   return (
     <ChatContext.Provider
