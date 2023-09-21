@@ -4,3 +4,7 @@
   overflow-y: scroll;
   scrollbar-width: none;
 }
+.backGround{
+  background-color: grey;
+  background-image:linear-gradient(to right, grey , black);
+}

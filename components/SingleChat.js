@@ -178,10 +178,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             pb={3}
             px={2}
             w="100%"
-            fontFamily="Work sans"
+            fontFamily="cursive"
             display="flex"
             justifyContent={{ base: "space-between" }}
             alignItems="center"
+            color={"white"}
           >
             <IconButton
               display={{ base: "flex", md: "none" }}
@@ -217,6 +218,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             borderRadius="lg"
             overflowY="hidden"
             className="messagesBackground"
+            fontFamily="cursive"
           >
             {loading ? (
               <Spinner
@@ -249,6 +251,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={typinghandler}
+                fontFamily="cursive"
               />
             </FormControl>
           </Box>

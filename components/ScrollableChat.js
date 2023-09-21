@@ -34,9 +34,10 @@ const ScrollableChat = ({ messages }) => {
             </Tooltip>)}
             <span
               style={{
-                backgroundColor: `${m.sender._id === user.id ? "#BEE3F8" : "#B9F5D0"
+                backgroundColor: `${m.sender._id === user.id ? "#292b29" : "grey"
                   }`,
                 marginTop:4,
+                color:"white",
                 marginLeft:(isSameSender(messages, m, i, user.id)===false&&isLastMessage(messages, m, i, user.id))?0:isSameSender(messages, m, i, user.id)?"auto":33,
                 borderRadius: "20px",
                 padding: "5px 15px",

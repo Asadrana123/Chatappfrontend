@@ -6,14 +6,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
   .index {
     min-height: 100vh;
-    background-image: url("https://e0.pxfuel.com/wallpapers/1019/412/desktop-wallpaper-whatsapp-122-chat-whatsapp-marble-iphone-for-your-mobile-tablet-explore-whatsapp-background-whatsapp-whatsapp-whatsapp-lilac-marble.jpg");
+    background-image: url("https://thumbs.dreamstime.com/z/abstract-message-letter-chat-icon-over-black-background-illustration-flat-design-outline-pictogram-infographic-web-app-207375849.jpg");
   }
   /* .singleChat{
     width: 100%;
@@ -22,11 +17,11 @@ body {
     background-image: url("https://blog.localz.com/hubfs/background-app-chat-featured.png");
   } */
   .messagesBackground{
-    background-size:contain;
-    background-image: url("https://static.vecteezy.com/system/resources/previews/025/442/425/non_2x/mobile-chat-app-online-communication-social-networking-messages-speech-bubbles-tiny-people-chatting-in-mobile-smartphone-screen-modern-flat-cartoon-style-illustration-on-white-background-vector.jpg");
+    background-image: url("https://i.pinimg.com/1200x/85/ec/df/85ecdf1c3611ecc9b7fa85282d9526e0.jpg");
 
   }
   .MychatsBackground{
+    background-size:cover;
     background-image: url("https://cdn.w600.comps.canstockphoto.com/chat-application-icons-eps-vector_csp14297085.jpg");
   }
   .messages {

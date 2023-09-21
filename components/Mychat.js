@@ -56,20 +56,23 @@ const MyChats = ({ fetchAgain }) => {
       flexDir="column"
       alignItems="center"
       p={3}
-      bg="white"
       w={{ base: "100%", md: "31%" }}
       borderRadius="lg"
       borderWidth="1px"
+      bgImage={"linear-gradient(to right, grey , #292626);"}
+      fontFamily="cursive"
     >
       <Box
         pb={3}
         px={3}
         fontSize={{ base: "28px", md: "30px" }}
-        fontFamily="Work sans"
+        fontFamily="cursive"
         display="flex"
         w="100%"
         justifyContent="space-between"
         alignItems="center"
+        color={"white"}
+        
       >
         My Chats
         <GroupChatModal>
@@ -86,7 +89,6 @@ const MyChats = ({ fetchAgain }) => {
         display="flex"
         flexDir="column"
         p={3}
-        bg="#F8F8F8"
         w="100%"
         h="100%"
         borderRadius="lg"
@@ -99,6 +101,7 @@ const MyChats = ({ fetchAgain }) => {
                 onClick={()=>handleClickonChat(chat)}
                 cursor="pointer"
                 bg={selectedChat === chat ? "#38B2AC" : "white"}
+                bgImage={selectedChat === chat ? "linear-gradient(to right,#393b39, #0e120e)" : "linear-gradient(to right,grey, black)"}
                 color={selectedChat === chat ? "white" : "black"}
                 px={2}
                 py={2}
@@ -117,8 +120,8 @@ const MyChats = ({ fetchAgain }) => {
                     ? getSender(loggedUser, chat.users)
                     : chat.chatName}
                 </Text>
-                  <Text fontSize="xs">
-                    <b>{chat.latestMessage?.sender.name}:</b>
+                  <Text fontSize={"15px"}>
+                    <b>{chat.latestMessage?.sender.name}: </b>
                      {chat.latestMessage?.content}
                   </Text>
 

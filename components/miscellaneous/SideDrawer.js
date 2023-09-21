@@ -148,6 +148,7 @@ function SideDrawer() {
         alignItems="center"
         w="100%"
         p="5px 10px 5px 10px"
+        fontFamily="cursive"
 
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
@@ -158,7 +159,7 @@ function SideDrawer() {
             </Text>
           </Button>
         </Tooltip>
-        <Text fontSize="2xl" display={{ base: "none", sm: "flex" }} fontFamily="Work sans" color="white">
+        <Text fontSize="2xl" display={{ base: "none", sm: "flex" }} fontFamily="cursive" color="white">
           Chatapp
         </Text>
         <div>
