@@ -18,7 +18,7 @@ const Signup = () => {
   const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
   const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
-  const {user,setUser}=ChatState();
+  const {setUser}=ChatState();
   const router=useRouter();
   const submitHandler = async () => {
     setPicLoading(true);

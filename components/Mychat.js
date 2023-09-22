@@ -102,7 +102,7 @@ const MyChats = ({ fetchAgain }) => {
                 cursor="pointer"
                 bg={selectedChat === chat ? "#38B2AC" : "white"}
                 bgImage={selectedChat === chat ? "linear-gradient(to right,#393b39, #0e120e)" : "linear-gradient(to right,grey, black)"}
-                color={selectedChat === chat ? "white" : "black"}
+                color={selectedChat === chat ? "white" : "white"}
                 px={2}
                 py={2}
                 borderRadius="lg"
@@ -122,7 +122,7 @@ const MyChats = ({ fetchAgain }) => {
                 </Text>
                   <Text fontSize={"15px"}>
                     <b>{chat.latestMessage?.sender.name}: </b>
-                     {chat.latestMessage?.content}
+                     {chat.latestMessage?.content.length>30?"Image":chat.latestMessage?.content}
                   </Text>
 
                 </Box>

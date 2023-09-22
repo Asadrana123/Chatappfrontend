@@ -29,4 +29,20 @@ body {
     flex-direction: column;
     overflow-y: auto;
   }
+  .image-container {
+    text-align: center;
+    width: 100%;
+    padding: 5px;
+    background-color: rgb(48, 45, 45);
+    margin-top: 8px;
+    border-radius: 3px;
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+  }
+  .myimg{
+    width: 50%;
+  }
   

@@ -5,7 +5,8 @@ import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon,AttachmentIcon } from "@chakra-ui/icons";
+import ImageIcon from '@mui/icons-material/Image';
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
 import Lottie from "lottie-react";
@@ -14,6 +15,7 @@ import chattinggif from "../animations/chatting.json";
 import UpdateGroupChatModal from "./miscellaneous/UpdateGroupChatModal";
 import { ChatState } from "../Context/ChatProvider";
 import { io } from "socket.io-client";
+import { useRef } from "react";
 const ENDPOINT = "https://chatappserver6.onrender.com"
 var socket,selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
@@ -23,7 +25,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
   const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
-  const toast = useToast();
+  const filePickerRef=useRef(null)
   const defaultOptions = {
     loop: false,
     autoplay: false,
@@ -33,7 +35,75 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     },
   };
   const [socketConnected, setSocketConnected] = useState(false);
+  const [pic, setPic] = useState();
+  const toast = useToast();
+  const [picLoading, setPicLoading] = useState(false);
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
+  const sendImagemsg= async (link)=>{
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      setNewMessage("");
+      const { data } = await axios.post(
+        `${ApiEndpoint}/api/message/sendMessage`,
+        {
+          content: link,
+          chatId: selectedChat._id,
+        },
+        config
+      );
+      setMessages([...messages, data.data[0]]);
+      data.data[0].userId = user.id;
+      socket.emit("newMessage", data.data[0]);
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error Occured!",
+        description: "Failed to send the Message",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+  const handleImagemsg=(pics)=>{
+    console.log("hi");
+    if (pics === undefined) {
+      toast({
+        title: "Please Select an Image!",
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      return;
+    }
+    console.log(pics.type);
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "asaddemoapp");
+      data.append("cloud_name", "my1chatapp");
+      fetch("https://api.cloudinary.com/v1_1/my1chatapp/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setPic(data.url.toString());
+          console.log(data.url.toString());
+          sendImagemsg(data.url.toString())
+        })
+        .catch((err) => {
+          console.log(err);
+        });  
+    }  
+  }
   const updateInDB = async (chat, value) => {
     const config = {
       headers: {
@@ -239,6 +309,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               id="first-name"
               isRequired
               mt={3}
+              display={"flex"}
+              flexDirection={"row"}
             >
               {istyping ? <div>
                 <Lottie
@@ -246,6 +318,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                   style={{ height: "100px", width: "100px" }}
                 />
               </div> : <></>}
+              <div>
+              <div>
+              <ImageIcon 
+                 sx={{color:"white",fontSize:"35px"}}
+                 onClick={()=>filePickerRef.current.click()}
+                 cursor="pointer"
+              />
+                   <Input hidden type="file"
+                     ref={filePickerRef}
+                     onChange={(e)=>handleImagemsg(e.target.files[0])}
+                   />
+                    </div>
+              </div>
               <Input
                 bg="#E0E0E0"
                 placeholder="Enter a message.."

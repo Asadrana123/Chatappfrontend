@@ -8,6 +8,7 @@ import {
   isSameSender,
 } from "../config/ChatLogics";
 import { ChatState } from "../Context/ChatProvider";
+import ChatMessage from "./ChatMessage";
 import ScrollableFeed from "react-scrollable-feed";
 const ScrollableChat = ({ messages }) => {
   const scrollableRef = useRef(null);
@@ -32,7 +33,9 @@ const ScrollableChat = ({ messages }) => {
                 src={m.sender.pic}
               />
             </Tooltip>)}
-            <span
+            {m.content.length>80?<ChatMessage imageUrl={m.content} isMyMessage={false}
+                   mymargin={(isSameSender(messages, m, i, user.id)===false&&isLastMessage(messages, m, i, user.id))?0:isSameSender(messages, m, i, user.id)?"auto":33}
+            />:<span
               style={{
                 backgroundColor: `${m.sender._id === user.id ? "#292b29" : "grey"
                   }`,
@@ -45,7 +48,7 @@ const ScrollableChat = ({ messages }) => {
               }}
             >
               {m.content}
-            </span>
+            </span>}
           </div>
         ))}
     </>
