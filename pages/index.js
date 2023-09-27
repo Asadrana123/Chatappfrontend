@@ -15,7 +15,8 @@ import { useRouter } from "next/router";
 function Homepage() {
   const router=useRouter();
   return (
-    <div className="index">
+    <div className="index" 
+    >
     <Container maxW="xl" centerContent>
       <Box
         display="flex"
@@ -27,6 +28,7 @@ function Homepage() {
         borderRadius="lg"
         bgImage={"linear-gradient(to right, grey , #292626);"}
         borderWidth="1px"
+        color={"white"}
       >
         <Text fontSize="4xl" fontFamily="cursive">
           Chatapp
@@ -35,10 +37,10 @@ function Homepage() {
       <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px" bgImage={"linear-gradient(to right, grey , #292626);"}
         fontFamily="cursive"
       >
-        <Tabs isFitted variant="soft-rounded">
+        <Tabs isFitted variant="soft-rounded" >
           <TabList mb="1em">
-            <Tab>Signin</Tab>
-            <Tab>Signup</Tab>
+            <Tab color={"white"}>Signin</Tab>
+            <Tab color={"white"}>Signup</Tab>
           </TabList>
           <TabPanels>
             <TabPanel>

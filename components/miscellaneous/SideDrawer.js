@@ -152,9 +152,8 @@ function SideDrawer() {
 
       >
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
-          <Button onClick={onOpen}>
-            <i className="fas fa-search"></i>
-            <Text display="flex" px={4}>
+          <Button bgImage={"linear-gradient(to right, grey , #292626);"} colorScheme={"white"} onClick={onOpen}>
+            <Text display="flex">
               Search User
             </Text>
           </Button>
@@ -199,15 +198,15 @@ function SideDrawer() {
                 <MenuItem>My Profile</MenuItem>{" "}
               </ProfileModal>
               <MenuDivider />
-              <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+              <MenuItem>Logout</MenuItem>
             </MenuList>
           </Menu>
         </div>
       </Box>
-      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen} bgImage={"linear-gradient(to right, grey , #292626);"}>
         <DrawerOverlay />
-        <DrawerContent>
-          <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
+        <DrawerContent bgImage={"linear-gradient(to right, grey , #292626);"}>
+          <DrawerHeader borderBottomWidth="1px" color={"white"}>Search Users</DrawerHeader>
           <DrawerBody>
             <Box display="flex" pb={2}>
               <Input
@@ -215,6 +214,7 @@ function SideDrawer() {
                 mr={2}
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                _placeholder={{color:"white"}}
               />
               <Button onClick={handleSearch}>Go</Button>
             </Box>

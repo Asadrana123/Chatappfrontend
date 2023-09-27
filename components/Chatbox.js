@@ -9,7 +9,7 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
       display={{ base: selectedChat ? "flex" : "none", md: "flex" }}
       alignItems="center"
       flexDirection="column"
-      p={3}
+      padding={3}
       bgImage={"linear-gradient(to right, grey , black);"}
       w={{ base: "100%", md: "68%" }}
       borderRadius="lg"

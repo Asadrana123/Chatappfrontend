@@ -132,29 +132,32 @@ const GroupChatModal = ({ children }) => {
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bgImage={"linear-gradient(to right, grey , #292626);"}>
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
+            color={"white"}
           >
             Create Group Chat
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody display="flex" flexDir="column" alignItems="center">
             <FormControl>
               <Input
                 placeholder="Chat Name"
                 mb={3}
                 onChange={(e) => setGroupChatName(e.target.value)}
+                _placeholder={{color:"white"}}
               />
             </FormControl>
             <FormControl>
               <Input
                 placeholder="Add Users eg: John, Piyush, Jane"
                 mb={1}
-                onChange={(e) => handleSearch(e.target.value)}
+                onChange={(e) => handleSearch(e.target.value)} 
+                _placeholder={{color:"white"}}
               />
             </FormControl>
             <Box w="100%" display="flex" flexWrap="wrap">
@@ -182,7 +185,7 @@ const GroupChatModal = ({ children }) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button onClick={handleSubmit} colorScheme="blue">
+            <Button onClick={handleSubmit} colorScheme="white" bgImage={"linear-gradient(to right, grey , #292626);"}>
               Create Chat
             </Button>
           </ModalFooter>

@@ -25,9 +25,9 @@ const ProfileModal = ({ user, children }) => {
       )}
       <Modal size="lg" onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent h="410px">
+        <ModalContent h="410px" color={"white"} bgImage={"linear-gradient(to right, grey , #292626);"} >
           <ModalHeader
-            fontSize="40px"
+            fontSize={{ base: "25px", md: "40px" }}
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
@@ -49,7 +49,7 @@ const ProfileModal = ({ user, children }) => {
               objectFit={"contain"}
             />
             <Text
-              fontSize={{ base: "28px", md: "30px" }}
+              fontSize={{ base: "25px", md: "30px" }}
               fontFamily="Work sans"
             >
               Email: {user.email}

@@ -9,17 +9,18 @@ const UserListItem = ({ handleFunction,user }) => {
       cursor="pointer"
       bg="#E8E8E8"
       _hover={{
-        background: "#38B2AC",
+        bgImage: "linear-gradient(to right,#393b39, #0e120e)",
         color: "white",
       }}
       w="100%"
       display="flex"
       alignItems="center"
-      color="black"
+      color="white"
       px={3}
       py={2}
       mb={2}
       borderRadius="lg"
+      bgImage={"linear-gradient(to right, grey, black);"}
     >
       <Avatar
         mr={2}

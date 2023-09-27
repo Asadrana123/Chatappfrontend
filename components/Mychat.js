@@ -72,13 +72,16 @@ const MyChats = ({ fetchAgain }) => {
         justifyContent="space-between"
         alignItems="center"
         color={"white"}
-        
       >
         My Chats
         <GroupChatModal>
           <Button
             display="flex"
             fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+            bgImage={"linear-gradient(to right, grey , #292626);"}
+            color={"white"}
+            backgroundColor={"black"}
+            colorScheme="white"
             rightIcon={<AddIcon />}
           >
             Create Group 
@@ -122,7 +125,7 @@ const MyChats = ({ fetchAgain }) => {
                 </Text>
                   <Text fontSize={"15px"}>
                     <b>{chat.latestMessage?.sender.name}: </b>
-                     {chat.latestMessage?.content.length>30?"Image":chat.latestMessage?.content}
+                     {chat.latestMessage?.content.length>30?"Last message is Image":chat.latestMessage?.content.slice(0,10)+"...."}
                   </Text>
 
                 </Box>

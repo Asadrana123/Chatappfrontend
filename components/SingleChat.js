@@ -296,6 +296,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 w={20}
                 h={20}
                 alignSelf="center"
+                color="white"
                 margin="auto"
               />
             ) : (
@@ -334,6 +335,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               <Input
                 bg="#E0E0E0"
                 placeholder="Enter a message.."
+                color={"black"}
                 value={newMessage}
                 onChange={typinghandler}
                 fontFamily="cursive"

@@ -140,27 +140,30 @@ const Signup = () => {
   return (
     <VStack spacing="5px">
       <FormControl isRequired>
-        <FormLabel>Name</FormLabel>
+        <FormLabel color={"white"}>Name</FormLabel>
         <Input
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
+          _placeholder={{ color: 'white' }}
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Email Address</FormLabel>
+        <FormLabel color={"white"}>Email Address</FormLabel>
         <Input
           type="email"
           placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
+          _placeholder={{ color: 'white' }}
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color={"white"}>Password</FormLabel>
         <InputGroup size="md">
           <Input
             type={show ? "text" : "password"}
             placeholder="Enter Password"
             onChange={(e) => setPassword(e.target.value)}
+            _placeholder={{ color: 'white' }}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -170,7 +173,7 @@ const Signup = () => {
         </InputGroup>
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Confirm Password</FormLabel>
+        <FormLabel color={"white"}>Confirm Password</FormLabel>
         <InputGroup size="md">
           <Input
             type= "password"
@@ -185,12 +188,13 @@ const Signup = () => {
         </InputGroup>
       </FormControl>
       <FormControl>
-        <FormLabel>Upload your Picture</FormLabel>
+        <FormLabel color={"white"}>Upload your Picture</FormLabel>
         <Input
           type="file"
           p={1.5}
           accept="image/*"
           onChange={(e) => postDetails(e.target.files[0])}
+          _placeholder={{ color: 'white' }}
         />
       </FormControl>
       <Button

@@ -72,22 +72,24 @@ const Signin = () => {
   return (
     <VStack spacing="10px">
       <FormControl isRequired>
-        <FormLabel>Email Address</FormLabel>
+        <FormLabel color={"white"} >Email Address</FormLabel>
         <Input
           value={email}
           type="email"
           placeholder="Enter Your Email Address"
           onChange={(e) => setEmail(e.target.value)}
+          _placeholder={{ color: 'white' }}
         />
       </FormControl>
       <FormControl isRequired>
-        <FormLabel>Password</FormLabel>
+        <FormLabel color={"white"}>Password</FormLabel>
         <InputGroup size="md">
           <Input
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             type={show ? "text" : "password"}
             placeholder="Enter password"
+            _placeholder={{ color: 'white' }}
           />
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -107,7 +109,7 @@ const Signin = () => {
       </Button>
       <Button
         variant="solid"
-        colorScheme="red"
+        colorScheme="blue"
         width="100%"
         onClick={() => {
           setEmail("guest@example.com");

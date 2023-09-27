@@ -43,6 +43,30 @@ body {
     height: auto;
   }
   .myimg{
-    width: 50%;
+    width: 35%;
+  }
+  Input{
+     color: white;
+  }
+  .pushable {
+    margin-top: 10px;
+    background-image: linear-gradient(to right, grey , #292626);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+  }
+  .front {
+    display: block;
+    padding: 8px 25px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: linear-gradient(to right, grey , #292626);
+    color: white;
+    transform: translateY(-5px);
+  }
+  .pushable:active .front {
+    transform: translateY(-2px);
   }
   
