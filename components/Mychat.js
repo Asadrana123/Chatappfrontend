@@ -125,7 +125,7 @@ const MyChats = ({ fetchAgain }) => {
                 </Text>
                   <Text fontSize={"15px"}>
                     <b>{chat.latestMessage?.sender.name}: </b>
-                     {chat.latestMessage?.content.length>30?"Last message is Image":chat?.latestMessage?chat.latestMessage.content.length>10?chat.latestMessage.content.slice(0,10)+"...":chat.latestMessage.content:""}
+                     {chat.latestMessage?.content?.includes("http://res.cloudinary.com/my1chatapp/image/upload")?"Last message is Image":chat?.latestMessage?chat.latestMessage.content.length>10?chat.latestMessage.content.slice(0,10)+"...":chat.latestMessage.content:""}
                   </Text>
 
                 </Box>

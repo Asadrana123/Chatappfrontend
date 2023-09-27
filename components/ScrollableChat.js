@@ -33,7 +33,7 @@ const ScrollableChat = ({ messages }) => {
                 src={m.sender.pic}
               />
             </Tooltip>)}
-            {m.content.length>80?<ChatMessage imageUrl={m.content} isMyMessage={false}
+            {m.content?.includes("http://res.cloudinary.com/my1chatapp/image/upload")?<ChatMessage imageUrl={m.content} isMyMessage={false}
                    mymargin={(isSameSender(messages, m, i, user.id)===false&&isLastMessage(messages, m, i, user.id))?0:isSameSender(messages, m, i, user.id)?"auto":33}
             />:<span
               style={{
