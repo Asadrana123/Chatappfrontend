@@ -6,6 +6,9 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+*{
+  font-family:cursive;
+}
   .index {
     min-height: 100vh;
     background-image: url("https://thumbs.dreamstime.com/z/abstract-message-letter-chat-icon-over-black-background-illustration-flat-design-outline-pictogram-infographic-web-app-207375849.jpg");
