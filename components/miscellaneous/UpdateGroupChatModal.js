@@ -209,12 +209,13 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
 
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bgImage={"linear-gradient(to right, grey , #292626);"}>
           <ModalHeader
             fontSize="35px"
             fontFamily="Work sans"
             display="flex"
             justifyContent="center"
+            color={"white"}
           >
             {selectedChat.chatName}
           </ModalHeader>
@@ -237,6 +238,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 mb={3}
                 value={groupChatName}
                 onChange={(e) => setGroupChatName(e.target.value)}
+                _placeholder={{color:"white"}}
               />
               <Button
                 variant="solid"
@@ -244,6 +246,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 ml={1}
                 isLoading={renameloading}
                 onClick={handleRename}
+                bgImage={"linear-gradient(to right, grey , #292626);"}
               >
                 Update
               </Button>
@@ -253,6 +256,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
                 placeholder="Add User to group"
                 mb={1}
                 onChange={(e) => handleSearch(e.target.value)}
+                _placeholder={{color:"white"}}
               />
             </FormControl>
 
@@ -268,8 +272,8 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
               ))
             )}
           </ModalBody>
-          <ModalFooter>
-            <Button onClick={() => handleRemove(user)} colorScheme="red">
+          <ModalFooter >
+            <Button onClick={() => handleRemove(user)} colorScheme="white" bgImage={"linear-gradient(to right, grey , #292626);"}>
               Leave Group
             </Button>
           </ModalFooter>
