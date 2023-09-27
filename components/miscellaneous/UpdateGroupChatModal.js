@@ -220,7 +220,7 @@ const UpdateGroupChatModal = ({ fetchMessages, fetchAgain, setFetchAgain }) => {
             {selectedChat.chatName}
           </ModalHeader>
 
-          <ModalCloseButton />
+          <ModalCloseButton color={"white"} />
           <ModalBody display="flex" flexDir="column" alignItems="center">
             <Box w="100%" display="flex" flexWrap="wrap" pb={3}>
               {selectedChat.users.map((u) => (
