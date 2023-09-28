@@ -18,6 +18,7 @@ import { io } from "socket.io-client";
 import { useRef } from "react";
 const ENDPOINT = "https://chatappserver6.onrender.com"
 var socket,selectedChatCompare;
+var mymessages=[];
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -142,14 +143,14 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   }
   useEffect(() => {
     socket.on("recievedMessage", (data) => {
-      console.log(selectedChat);
       if (!selectedChatCompare || selectedChatCompare._id !== data.chat._id){
         if (checkpresentbefore(data.chat, notification) === false) {
           updateInDB(data.chat, true);
           setNotification([data.chat, ...notification]);
         }
       }
-      setMessages([...messages, data]);
+      console.log(mymessages);
+      setMessages([...mymessages, data]);
     })
     socket.on("typing", () => {
       setIsTyping(true);
@@ -191,6 +192,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         config
       );
       setMessages(data.result);
+      mymessages=data.result;
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
       console.log(error);
