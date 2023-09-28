@@ -141,7 +141,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     })
     return ans;
   }
+  const checkifpresent=(data)=>{
+     return  mymessages[mymessages.length-1]._id===data._id;
+  }
   useEffect(() => {
+    console.log("hi")
     socket.on("recievedMessage", (data) => {
       if (!selectedChatCompare || selectedChatCompare._id !== data.chat._id){
         if (checkpresentbefore(data.chat, notification) === false) {
@@ -149,8 +153,11 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           setNotification([data.chat, ...notification]);
         }
       }
-      console.log(mymessages);
+      console.log(data);
+     if(checkifpresent(data)===false) {
       setMessages([...mymessages, data]);
+      mymessages.push(data);
+     }
     })
     socket.on("typing", () => {
       setIsTyping(true);
