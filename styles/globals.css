@@ -73,3 +73,6 @@ body {
     transform: translateY(-2px);
   }
   
+  ::-webkit-scrollbar {
+    display: none;
+}

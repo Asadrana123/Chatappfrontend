@@ -304,7 +304,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <ScrollableChat messages={messages} />
               </div>
             )}
-
+             {istyping ? <div>
+                <Lottie
+                  animationData={animationData}
+                  style={{ height: "100px", width: "100px" }}
+                />
+              </div> : <></>}
             <FormControl
               onKeyDown={sendMessage}
               id="first-name"
@@ -313,12 +318,6 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               display={"flex"}
               flexDirection={"row"}
             >
-              {istyping ? <div>
-                <Lottie
-                  animationData={animationData}
-                  style={{ height: "100px", width: "100px" }}
-                />
-              </div> : <></>}
               <div>
               <div>
               <ImageIcon 

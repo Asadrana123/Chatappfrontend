@@ -11,7 +11,7 @@ const Chatbox = ({ fetchAgain, setFetchAgain }) => {
       flexDirection="column"
       padding={3}
       bgImage={"linear-gradient(to right, grey , black);"}
-      w={{ base: "100%", md: "68%" }}
+      w={{ base: "100%", md: "59%",lg:"68%" }}
       borderRadius="lg"
       borderWidth="1px"
     >

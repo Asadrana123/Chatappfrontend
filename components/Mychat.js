@@ -30,7 +30,6 @@ const MyChats = ({ fetchAgain }) => {
           if(element.Notification===true&&element.latestMessage.sender._id!==user.id) setNotification([element,...notification]);
       })
       setChats(data);
-      console.log(data);
     } catch (error) {
         console.log(error);
       toast({
@@ -56,7 +55,7 @@ const MyChats = ({ fetchAgain }) => {
       flexDir="column"
       alignItems="center"
       p={3}
-      w={{ base: "100%", md: "31%" }}
+      w={{ base: "100%",md:"40%",lg:"31%" }}
       borderRadius="lg"
       borderWidth="1px"
       bgImage={"linear-gradient(to right, grey , #292626);"}
@@ -65,7 +64,7 @@ const MyChats = ({ fetchAgain }) => {
       <Box
         pb={3}
         px={3}
-        fontSize={{ base: "28px", md: "30px" }}
+        fontSize={{ base: "24px", md: "20px",lg:"30px" }}
         fontFamily="cursive"
         display="flex"
         w="100%"
@@ -123,7 +122,7 @@ const MyChats = ({ fetchAgain }) => {
                     ? getSender(loggedUser, chat.users)
                     : chat.chatName}
                 </Text>
-                  <Text fontSize={"15px"}>
+                  <Text fontSize={{base:"15px",md:"12px",lg:"15px"}}>
                     <b>{chat.latestMessage?.sender.name}: </b>
                      {chat.latestMessage?.content?.includes("http://res.cloudinary.com/my1chatapp/image/upload")?"Latest message is an Image":chat?.latestMessage?chat.latestMessage.content.length>10?chat.latestMessage.content.slice(0,10)+"...":chat.latestMessage.content:""}
                   </Text>
