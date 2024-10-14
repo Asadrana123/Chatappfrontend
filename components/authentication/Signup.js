@@ -9,6 +9,8 @@ import { useRouter } from "next/router";
 import { ChatState } from "@/Context/ChatProvider";
 const Signup = () => {
   const [show, setShow] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const handleConfirm = () => setShowConfirm(!showConfirm);
   const handleClick = () => setShow(!show);
   const toast = useToast();
   const [name, setName] = useState();
@@ -17,12 +19,12 @@ const Signup = () => {
   const [password, setPassword] = useState();
   const [pic, setPic] = useState();
   const [picLoading, setPicLoading] = useState(false);
-  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
-  const {setUser}=ChatState();
-  const router=useRouter();
+  const ApiEndpoint = process.env.NEXT_PUBLIC_API_URL;
+  const { setUser } = ChatState();
+  const router = useRouter();
   const submitHandler = async () => {
     setPicLoading(true);
-    if (password.length<10) {
+    if (password.length < 10) {
       toast({
         title: "Password should more than 10",
         status: "warning",
@@ -176,13 +178,14 @@ const Signup = () => {
         <FormLabel color={"white"}>Confirm Password</FormLabel>
         <InputGroup size="md">
           <Input
-            type= "password"
+            type={showConfirm ? "text" : "password"}
             placeholder="Confirm password"
             onChange={(e) => setConfirmpassword(e.target.value)}
+            _placeholder={{ color: 'white' }}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={handleClick}>
-              {show ? "Hide" : "Show"}
+            <Button h="1.75rem" size="sm" onClick={handleConfirm}>
+              {showConfirm ? "Hide" : "Show"}
             </Button>
           </InputRightElement>
         </InputGroup>

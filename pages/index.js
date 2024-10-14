@@ -31,7 +31,7 @@ function Homepage() {
         color={"white"}
       >
         <Text fontSize="4xl" fontFamily="cursive">
-          Chatapp
+          Chatify
         </Text>
       </Box>
       <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px" bgImage={"linear-gradient(to right, grey , #292626);"}
