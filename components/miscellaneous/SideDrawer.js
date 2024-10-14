@@ -159,7 +159,7 @@ function SideDrawer() {
           </Button>
         </Tooltip>
         <Text fontSize="2xl" display={{ base: "none", sm: "flex" }} fontFamily="cursive" color="white">
-          Chatapp
+          Chatify
         </Text>
         <div>
           <Menu>
