@@ -223,7 +223,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       };
       setNewMessage("");
       const {data} = await axios.post(
-        `http://localhost:8000/api/message/aichat`,
+        `${ApiEndpoint}/api/message/aichat`,
         {
           content: newMessage,
           chatId: selectedChat._id,
