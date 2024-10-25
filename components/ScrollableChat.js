@@ -12,11 +12,9 @@ import ChatMessage from "./ChatMessage";
 import ScrollableFeed from "react-scrollable-feed";
 const ScrollableChat = ({ messages }) => {
   const scrollableRef = useRef(null);
-  // Effect to scroll to the bottom when shouldScroll changes
   useEffect(() => {
     scrollableRef.current?.scrollIntoView();
   }, [messages]);
-
   const { user } = ChatState();
   return (
     <>

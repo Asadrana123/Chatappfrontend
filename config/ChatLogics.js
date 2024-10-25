@@ -7,7 +7,7 @@
   export const isSameSender=(messages, m, i, userid)=>{
             //console.log(userid);
             //console.log(m.sender._id);
-            if(m.sender._id===userid) return true;
+            if(m.sender?._id===userid) return true;
             else return false;
   }
   export const isLastMessage=(messages,m,i,userid)=>{

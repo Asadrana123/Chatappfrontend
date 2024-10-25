@@ -5,7 +5,7 @@ import { IconButton, Spinner, useToast } from "@chakra-ui/react";
 import { getSender, getSenderFull } from "../config/ChatLogics";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { ArrowBackIcon,AttachmentIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon, AttachmentIcon } from "@chakra-ui/icons";
 import ImageIcon from '@mui/icons-material/Image';
 import ProfileModal from "./miscellaneous/ProfileModal";
 import ScrollableChat from "./ScrollableChat";
@@ -17,16 +17,16 @@ import { ChatState } from "../Context/ChatProvider";
 import { io } from "socket.io-client";
 import { useRef } from "react";
 const ENDPOINT = "https://chatappserver6.onrender.com"
-var socket,selectedChatCompare;
-var mymessages=[];
+var socket, selectedChatCompare;
+var mymessages = [];
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
   const [typing, setTyping] = useState(false);
   const [istyping, setIsTyping] = useState(false);
-  const ApiEndpoint=process.env.NEXT_PUBLIC_API_URL;
-  const filePickerRef=useRef(null)
+  const ApiEndpoint = process.env.NEXT_PUBLIC_API_URL;
+  const filePickerRef = useRef(null)
   const defaultOptions = {
     loop: false,
     autoplay: false,
@@ -40,7 +40,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const toast = useToast();
   const [picLoading, setPicLoading] = useState(false);
   const { selectedChat, setSelectedChat, user, notification, setNotification } = ChatState();
-  const sendImagemsg= async (link)=>{
+  const sendImagemsg = async (link) => {
     try {
       const config = {
         headers: {
@@ -72,7 +72,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       });
     }
   }
-  const handleImagemsg=(pics)=>{
+  const handleImagemsg = (pics) => {
     console.log("hi");
     if (pics === undefined) {
       toast({
@@ -102,8 +102,8 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         })
         .catch((err) => {
           console.log(err);
-        });  
-    }  
+        });
+    }
   }
   const updateInDB = async (chat, value) => {
     const config = {
@@ -117,20 +117,20 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         value: value
       }, config);
     } catch (err) {
-            console.log(err);
+      console.log(err);
     }
   }
-  useEffect(() =>{
+  useEffect(() => {
     //socket = io(ENDPOINT);
-     socket = io(ENDPOINT,{
-         transports: ['websocket'],
-        });
+    socket = io(ENDPOINT, {
+      transports: ['websocket'],
+    });
     socket.emit("setup", user);
     socket.on("connected", () => {
       setSocketConnected(true)
     });
     fetchMessages();
-    selectedChatCompare=selectedChat;
+    selectedChatCompare = selectedChat;
   }, [selectedChat])
   const checkpresentbefore = (datatoadd, arr) => {
     var ans = false;
@@ -141,23 +141,21 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     })
     return ans;
   }
-  const checkifpresent=(data)=>{
-     return  mymessages[mymessages.length-1]._id===data._id;
+  const checkifpresent = (data) => {
+    return mymessages[mymessages.length - 1]._id === data._id;
   }
   useEffect(() => {
-    console.log("hi")
     socket.on("recievedMessage", (data) => {
-      if (!selectedChatCompare || selectedChatCompare._id !== data.chat._id){
+      if (!selectedChatCompare || selectedChatCompare._id !== data.chat._id) {
         if (checkpresentbefore(data.chat, notification) === false) {
           updateInDB(data.chat, true);
           setNotification([data.chat, ...notification]);
         }
       }
-      console.log(data);
-     if(checkifpresent(data)===false) {
-      setMessages([...mymessages, data]);
-      mymessages.push(data);
-     }
+      if (checkifpresent(data) === false) {
+        setMessages([...mymessages, data]);
+        mymessages.push(data);
+      }
     })
     socket.on("typing", () => {
       setIsTyping(true);
@@ -199,7 +197,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         config
       );
       setMessages(data.result);
-      mymessages=data.result;
+      mymessages = data.result;
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
       console.log(error);
@@ -214,8 +212,47 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
     setLoading(false);
   };
-  const sendMessage = async (event)=>{
-    if (event.key === "Enter" && newMessage){
+  const sendMessagetoChatBot = async () => {
+    console.log("chatBotMessage");
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      setNewMessage("");
+      const {data} = await axios.post(
+        `http://localhost:8000/api/message/aichat`,
+        {
+          content: newMessage,
+          chatId: selectedChat._id,
+        },
+        config
+      );
+      console.log("hello");
+      console.log(data[0][0]);
+      console.log(data[1][0]);
+      setMessages([...messages, data[0][0], data[1][0]]);
+      data[1][0].userId = user.id;
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error Occured!",
+        description: "Failed to send the Message",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+  const sendMessage = async (event) => {
+    if (event.key === "Enter" && newMessage) {
+      if (selectedChat.users[0]._id === "67189a1916769aad12310513" || selectedChat.users[1]._id === "67189a1916769aad12310513") {
+        sendMessagetoChatBot();
+        return;
+      }
       try {
         const config = {
           headers: {
@@ -232,6 +269,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           },
           config
         );
+        console.log(data.data[0]);
         setMessages([...messages, data.data[0]]);
         data.data[0].userId = user.id;
         socket.emit("newMessage", data.data[0]);
@@ -313,12 +351,12 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 <ScrollableChat messages={messages} />
               </div>
             )}
-             {istyping ? <div>
-                <Lottie
-                  animationData={animationData}
-                  style={{ height: "100px", width: "100px" }}
-                />
-              </div> : <></>}
+            {istyping ? <div>
+              <Lottie
+                animationData={animationData}
+                style={{ height: "100px", width: "100px" }}
+              />
+            </div> : <></>}
             <FormControl
               onKeyDown={sendMessage}
               id="first-name"
@@ -328,17 +366,17 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               flexDirection={"row"}
             >
               <div>
-              <div>
-              <ImageIcon 
-                 sx={{color:"white",fontSize:"35px"}}
-                 onClick={()=>filePickerRef.current.click()}
-                 cursor="pointer"
-              />
-                   <Input hidden type="file"
-                     ref={filePickerRef}
-                     onChange={(e)=>handleImagemsg(e.target.files[0])}
-                   />
-                    </div>
+                <div>
+                  <ImageIcon
+                    sx={{ color: "white", fontSize: "35px" }}
+                    onClick={() => filePickerRef.current.click()}
+                    cursor="pointer"
+                  />
+                  <Input hidden type="file"
+                    ref={filePickerRef}
+                    onChange={(e) => handleImagemsg(e.target.files[0])}
+                  />
+                </div>
               </div>
               <Input
                 bg="#E0E0E0"
