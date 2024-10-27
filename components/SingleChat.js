@@ -229,9 +229,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
         config
       );
-      setMessages([...messages,message, data.data[0]]);
-      data.data[0].userId = user.id;
-     // socket.emit("newMessage", data.data[0]);
+      setMessages([...messages,message,data.data[0]]);
       data.data[0].userId = user.id;
     } catch (error) {
       console.log(error);
@@ -262,10 +260,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
         config
       );
-      console.log(data);
       setMessages([...messages, data.data[0]]);
-      data.data[0].userId = user.id;
-      socket.emit("newMessage", data.data[0]);
       data.data[0].userId = user.id;
       getMessageFromChatBot(data.data[0]);
     } catch (error) {
