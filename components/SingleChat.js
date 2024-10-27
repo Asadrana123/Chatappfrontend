@@ -212,8 +212,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     }
     setLoading(false);
   };
-  const sendMessagetoChatBot = async () => {
-    console.log("chatBotMessage");
+  const getMessageFromChatBot = async (message) => {
     try {
       const config = {
         headers: {
@@ -222,19 +221,53 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
       };
       setNewMessage("");
-      const {data} = await axios.post(
-        `${ApiEndpoint}/api/message/aichat`,
+      const { data } = await axios.post(
+        `${ApiEndpoint}/api/message/get-chatbot`,
+        {
+          content: message.content,
+          chatId: selectedChat._id,
+        },
+        config
+      );
+      setMessages([...messages,message, data.data[0]]);
+      data.data[0].userId = user.id;
+     // socket.emit("newMessage", data.data[0]);
+      data.data[0].userId = user.id;
+    } catch (error) {
+      console.log(error);
+      toast({
+        title: "Error Occured!",
+        description: "Failed to send the Message",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+    }
+  }
+  const sendMessagetoChatBot = async () => {
+    try {
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      setNewMessage("");
+      const { data } = await axios.post(
+        `${ApiEndpoint}/api/message/send-chatbot`,
         {
           content: newMessage,
           chatId: selectedChat._id,
         },
         config
       );
-      console.log("hello");
-      console.log(data[0][0]);
-      console.log(data[1][0]);
-      setMessages([...messages, data[0][0], data[1][0]]);
-      data[1][0].userId = user.id;
+      console.log(data);
+      setMessages([...messages, data.data[0]]);
+      data.data[0].userId = user.id;
+      socket.emit("newMessage", data.data[0]);
+      data.data[0].userId = user.id;
+      getMessageFromChatBot(data.data[0]);
     } catch (error) {
       console.log(error);
       toast({
@@ -365,7 +398,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               display={"flex"}
               flexDirection={"row"}
             >
-              <div>
+            {(selectedChat.users[0]._id === "67189a1916769aad12310513" || selectedChat.users[1]._id === "67189a1916769aad12310513")===false&&<div>
                 <div>
                   <ImageIcon
                     sx={{ color: "white", fontSize: "35px" }}
@@ -377,7 +410,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                     onChange={(e) => handleImagemsg(e.target.files[0])}
                   />
                 </div>
-              </div>
+              </div>}
               <Input
                 bg="#E0E0E0"
                 placeholder="Enter a message.."
